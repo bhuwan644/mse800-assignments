@@ -21,7 +21,7 @@ def calculateTemp():
 
    print(f"Average temperature for the week is {avg_temp}")
 
-#### This function calculates the indices of highest and lowest temperature recorded and also prints t ######
+#### This function calculates the indices of highest and lowest temperature recorded and also prints the highest and lowest temperatures recorded over the week ######
 
 def identifyTempIndicesAbove20():
    indices = np.where(temp_data_via_numpy > 20)[0]
