@@ -6,7 +6,8 @@ class FileMethods:
         print("Reading a file...................")
         file=open(self.file_path,"r") # Opens the file in a read mode
         print("Here is your file")
-        print(file)
+        content = file.read() # Reading the file
+        print(f"Printing your file: {content}")
     
     
     def write_file(self):
