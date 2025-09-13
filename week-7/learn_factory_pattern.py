@@ -1,39 +1,62 @@
+from abc import ABC, abstractmethod
 
-from abc import ABC
+# Abstract Shape
+class Shape(ABC):
+    def __init__(self, shape_type: str):
+        self.shape_type = shape_type
 
-
-class Shape(ABC):  ## This is the abstract class 
-    def __init__(self,shape_type:str):
-        self.shape_type=shape_type
+    @abstractmethod
     def draw(self):
-        return (f"Drawing {self.shape_type}")
-    
-    
+        pass
+
+
+# Concrete Subclasses
+class Circle(Shape):
+    def __init__(self):
+        super().__init__("circle")
+
+    def draw(self):
+        return "Drawing a Circle"
+
+
+class Square(Shape):
+    def __init__(self):
+        super().__init__("square")
+
+    def draw(self):
+        return "Drawing a Square"
+
+
+class Triangle(Shape):
+    def __init__(self):
+        super().__init__("triangle")
+
+    def draw(self):
+        return "Drawing a Trianle"
+
+
+# Factory that chooses the right subclass
 class ShapeFactory:
-    valid_shapes={"circle","square","rectangle"}
+    valid_shapes = {
+        "circle": Circle,
+        "square": Square,
+        "triangle": Triangle
+    }
+
     @classmethod
-    def create_shape(cls,shape_type:str):
-        shape_type=shape_type.lower()
-        print(f"Shape type for the provided shape is :{shape_type}")
+    def create_shape(cls, shape_type: str):
+        shape_type = shape_type.lower()
         if shape_type in cls.valid_shapes:
-            print("Conditon match")
-            return Shape(shape_type)
+            return cls.valid_shapes[shape_type]()  # instantiate proper subclass
         else:
-            raise ValueError(f"Unknown shape {shape_type}  provided")
-        
-        
-        
+            raise ValueError(f"Unknown shape {shape_type} provided")
+
+
 def main():
-    print("Main function is running")
-    
-    input_shape=(input("Let us know what do you want to draw:")).lower()
-    print(f"input provided: {input_shape}")
-    factory1=ShapeFactory()
-    result=factory1.create_shape(input_shape)
-    print(result.draw())
-        
-if __name__=="__main__":
-        main()
-        
+    input_shape = input("Enter a shape: ")
+    shape = ShapeFactory.create_shape(input_shape)
+    print(shape.draw())
 
 
+if __name__ == "__main__":
+    main()
