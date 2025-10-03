@@ -13,7 +13,8 @@ class StringProcessor:
 
     def find_length_of_uppercase(self) -> int:
         """Return the number of uppercase letters in the provided string."""
-        return sum(t for c in self.text if c.isupper())
+        return len([c for c in self.text if c.isupper()])
+
 
 
 def main() -> None:
